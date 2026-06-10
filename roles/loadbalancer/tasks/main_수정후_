@@ -1,4 +1,5 @@
 ---
+# 이거 참고용 코드라 실행하는거 아님
 # tasks file for loadbalancer
 # 1. VPC 정보 조회
 - name: VPC Info
