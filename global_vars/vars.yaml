@@ -1,0 +1,35 @@
+# vars.yaml
+region: ap-northeast-2
+prefix: "aws08"
+key_name: "aws08-key"
+domain_name: "busanit.com"
+vpc_cidr: 10.8.0.0/16
+subnets:
+  pub_1a: { cidr: "10.8.0.0/20",  az: "ap-northeast-2a", resource: "subnet-public",  num: "1" }
+  pub_2c: { cidr: "10.8.16.0/20", az: "ap-northeast-2c", resource: "subnet-public",  num: "2" }
+  pri_1a: { cidr: "10.8.64.0/20", az: "ap-northeast-2a", resource: "subnet-private", num: "1" }
+  pri_2c: { cidr: "10.8.80.0/20", az: "ap-northeast-2c", resource: "subnet-private", num: "2" }
+  
+# IAM 이름 정의
+iam_names:
+  ec2_role: "{{ prefix }}-ec2-role"
+  ec2_profile: "{{ prefix }}-ec2-profile"
+  codedeploy_role: "{{ prefix }}-codedeploy-role"
+
+# 보안 그룹
+security_groups:
+  http: "{{ prefix }}-http-sg"
+  https: "{{ prefix }}-https-sg"
+  ssh: "{{ prefix }}-ssh-sg"
+
+# Jenkins 설정
+jenkins_id: "ami-0765f9741eedf9c7b" # Ubuntu 24.04 LTS
+jenkins_instance_type: "t3.medium"
+jenkins_ip: "10.8.64.100"
+jenkins_volume_size: 25
+
+# ALB 이름 정의
+alb_name:
+  jenkins_alb: "{{ prefix }}-jenkins-alb"
+  jenkins_tg: "{{ prefix }}-jenkins-tg"
+  

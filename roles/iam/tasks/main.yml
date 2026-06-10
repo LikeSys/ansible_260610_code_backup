@@ -1,0 +1,54 @@
+---
+# tasks file for iam
+# 1. EC2 인스턴스용 IAM 역할 생성 - S3, SSM
+- name: Create IAM Role for EC2
+  community.aws.iam_role:
+    name: "{{ iam_names.ec2_role }}"
+    state: present
+    assume_role_policy_document: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "ec2.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+    managed_policies:
+      - arn:aws:iam::aws:policy/AmazonS3FullAccess
+      - arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
+      - arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforAWSCodeDeploy
+  register: ec2_role_result
+
+# 2. EC2 인스턴스 프로파일 생성
+- name: Create IAM Instance Profile for EC2
+  amazon.aws.iam_instance_profile:
+    name: "{{ iam_names.ec2_profile }}"
+    role: "{{ iam_names.ec2_role }}"
+    
+# 3. Code Deploy Service 역할 생성
+- name: Create IAM Role for Code Deploy
+  community.aws.iam_role:
+    name: "{{ iam_names.codedeploy_role }}"
+    state: present
+    assume_role_policy_document: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "codedeploy.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+    managed_policies:
+      - arn:aws:iam::aws:policy/service-role/AWSCodeDeployRole
+  
+---

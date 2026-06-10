@@ -1,0 +1,6 @@
+- name: Loadbalancer Create
+  hosts: localhost
+  connection: local
+  vars_files:
+    - global_vars/vars.yaml
+  roles: [loadbalancer]

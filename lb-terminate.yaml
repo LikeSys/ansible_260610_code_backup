@@ -1,0 +1,7 @@
+- name: Loadbalancer Terminate
+  hosts: localhost
+  connection: local
+  vars_files:
+    - global_vars/vars.yaml
+  tasks:
+    - include_role: { name: loadbalancer, tasks_from: terminate }

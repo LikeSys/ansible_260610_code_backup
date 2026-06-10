@@ -1,0 +1,7 @@
+- name: IAM Terminate
+  hosts: localhost
+  connection: local
+  vars_files:
+    - global_vars/vars.yaml
+  tasks:
+    - include_role: { name: iam, tasks_from: terminate }

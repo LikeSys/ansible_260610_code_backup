@@ -1,0 +1,18 @@
+# 1. 인스턴스 프로필 삭제
+- name: Delete IAM Instance Profile for EC2
+  amazon.aws.iam_instance_profile:
+    name: "{{ iam_names.ec2_profile }}"
+    state: absent
+
+# 2. EC2 IAM 역할 삭제
+- name: Delete IAM Role for EC2
+  amazon.aws.iam_role:
+    name: "{{ iam_names.ec2_role }}"
+    state: absent
+
+# 3. Code Deploy IAM 역할 삭제
+- name: Delete IAM Role for Code Deploy
+  amazon.aws.iam_role:
+    name: "{{ iam_names.codedeploy_role }}"
+    state: absent
+

@@ -1,0 +1,6 @@
+- name: Security Group Create 
+  hosts: localhost
+  connection: local
+  vars_files:
+    - global_vars/vars.yaml
+  roles: [security]

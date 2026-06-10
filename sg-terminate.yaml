@@ -1,0 +1,7 @@
+- name: Security Group Terminate
+  hosts: localhost
+  connection: local
+  vars_files:
+    - global_vars/vars.yaml
+  tasks:
+    - include_role: { name: security, tasks_from: terminate }
